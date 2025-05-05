@@ -98,7 +98,7 @@ const generateToken = async(req, res, next) => {
 
     try {
         const response = await axios.get(
-            "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials", {
+            "", {
                 headers: {
                     Authorization: `Basic ${auth}`,
                 },
@@ -137,7 +137,7 @@ app.post("/stk", generateToken, async(req, res) => {
 
     const password = Buffer.from(shortcode + passkey + timestamp).toString("base64");
     await axios.post(
-            "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest", {
+            "", {
                 BusinessShortCode: shortcode,
                 Password: password,
                 Timestamp: timestamp,
@@ -146,7 +146,7 @@ app.post("/stk", generateToken, async(req, res) => {
                 PartyA: `254${phone}`,
                 PartyB: shortcode,
                 PhoneNumber: `254${phone}`,
-                CallBackURL: "https://c00d-197-232-62-147.ngrok-free.app/callback",
+                CallBackURL: "/callback",
                 AccountReference: `254${phone}`,
                 TransactionDesc: "Payment for Youth Synergy Network",
             }, {
